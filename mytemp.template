@@ -78,7 +78,7 @@ Resources:
               - Effect: Allow
                 Action:
                   - timestream:Select
-                Resource: !Sub "arn:${AWS::Partition}:timestream:${AWS::Region}:${AWS::AccountId}:database/${bv_timestream_one}/table/${bv_timestream_table_1.Name}"
+                Resource: !Sub "arn:${AWS::Partition}:timestream:${AWS::Region}:${AWS::AccountId}:database/${bv_timestream_one}/table/${bv_table_one.Name}"
 
   HttpDataSource:
     Type: AWS::AppSync::DataSource
@@ -155,7 +155,7 @@ Resources:
 
         function request(ctx) {
             const { durationInMinutes } = ctx.args;
-            const QUERY_1 = `SELECT * FROM "${bv_timestream_one}"."${bv_timestream_table_1.Name}" where time > ago(${!durationInMinutes}m)`;
+            const QUERY_1 = `SELECT * FROM "${bv_timestream_one}"."${bv_table_one.Name}" where time > ago(${!durationInMinutes}m)`;
 
             return {
                 method: 'POST',
@@ -256,7 +256,7 @@ Resources:
             - Effect: Allow
               Action:
                 - timestream:Select
-              Resource: !Sub "arn:${AWS::Partition}:timestream:${AWS::Region}:${AWS::AccountId}:database/${bv_timestream_one}/table/${bv_timestream_table_1.Name}"
+              Resource: !Sub "arn:${AWS::Partition}:timestream:${AWS::Region}:${AWS::AccountId}:database/${bv_timestream_one}/table/${bv_table_one.Name}"
       InlineCode: |
         "use strict";
 
@@ -399,7 +399,7 @@ Resources:
             - Effect: Allow
               Action:
                 - timestream:WriteRecords
-              Resource: !Sub "arn:${AWS::Partition}:timestream:${AWS::Region}:${AWS::AccountId}:database/${bv_timestream_one}/table/${bv_timestream_table_1.Name}"
+              Resource: !Sub "arn:${AWS::Partition}:timestream:${AWS::Region}:${AWS::AccountId}:database/${bv_timestream_one}/table/${bv_table_one.Name}"
       Events:
         ScheduleEvent:
           Type: Schedule
